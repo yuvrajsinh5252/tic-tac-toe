@@ -41,7 +41,7 @@ def game_board():
             )
         print()
         if (i < 2):
-            print('-----------------')
+            print('-----------')
 
 
 game_board()
