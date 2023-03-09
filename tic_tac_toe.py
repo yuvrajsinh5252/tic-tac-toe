@@ -1,9 +1,9 @@
 import os
 from rich.console import Console
+from pynput import keyboard
 
 console = Console()
 print = console.print
-
 
 def is_win():
     for i in range(3):
@@ -20,7 +20,12 @@ def is_win():
     if (squares[0][0] == 'O' and squares[1][1] == 'O' and squares[2][2] == 'O'):
         print("\n[bold blue]Player 1 has won[/]\n")
         return True
-
+    if (squares[0][2] == 'X' and squares[1][1] == 'X' and squares[2][0] == 'X'):
+        print("\n[bold blue]Player 2 has won[/]\n")
+        return True
+    if (squares[0][2] == 'O' and squares[1][1] == 'O' and squares[2][0] == 'O'):
+        print("\n[bold blue]Player 1 has won[/]\n")
+        return True
 
 def clear():
     if (os.name == "posix"):
@@ -28,6 +33,15 @@ def clear():
     else:
         os.system("cls")
 
+clear()
+
+print("[bold cyan]      |||----TIC TAC TOE----|||[/]\n")
+print("       Player 1 is [bold green]'O'[/] \n       Player 2 is [bold red]'X'[/]\n")
+print("[bold green]****Enter any key to start the game****[/]\n")
+
+with keyboard.Events() as events:
+    events.get()
+clear()
 
 squares = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
 
