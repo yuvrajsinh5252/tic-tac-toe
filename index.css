@@ -1,0 +1,120 @@
+* {
+    margin: 0;
+    height: 100vh;
+}
+body {
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.title {
+    display: flex;
+    flex-direction: row;
+    font-weight: 600;
+    height: 80px;
+    font-size: 60px;
+    padding-left: 130px;
+}
+.top {
+    display: flex;
+    height: 90px;
+    width: 600px;
+    gap: 100px;
+}
+.board {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    background: rgb(83, 80, 80);
+    width: 600px;
+    height: 600px;
+    padding: 15px;
+    border-radius: 1%;
+    opacity: 1;
+}
+.tile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3%;
+    width: 190px;
+    height: 190px;
+    font-size: 130px;
+    font-family: cursive;
+    color: rgb(135, 106, 96);
+    box-shadow: 2px 2px 10px black;
+    text-shadow: 1px 1px 10px white; 
+    background: rgb(149, 147, 147);
+}
+.score {
+    display: flex;
+    gap: 50px;
+    width: 600px;
+    height: 100px;
+    justify-content: center;
+    align-items: center;
+    padding-top: 10px;
+}
+.pl1,.pl2,.tie {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgb(184, 191, 164);
+    height: 100px;
+    width: 200px;
+    font-size: 20px;
+    border-radius: 5%;
+    box-shadow: 1px 1px 5px black;
+    flex-direction: column;
+}
+#o,#x,#t {
+    padding: 17px;
+    height: 7px;
+}
+.swap {
+    display: inline-block;
+    vertical-align: top;
+    width: 30px;
+    height: 30px;
+    margin: -5px -30px 0 0;
+    opacity: .5;
+    cursor: pointer;
+    outline: 0;    
+}
+.result {
+    position: absolute;
+    top: 45%;
+    left: 45%;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+}
+.restart {
+    height: 50px;
+    width: 200px;
+    font-size: 30px;
+    color:black;
+}
+h1 {
+    color: rgb(81, 70, 49);
+    height: 50px;
+}
+@keyframes show {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}

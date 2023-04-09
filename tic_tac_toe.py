@@ -54,9 +54,7 @@ def game_board():
                 end="|" if j < 2 else ""
             )
         print()
-        if (i < 2):
-            print('-----------')
-
+        (print('-----------') if i < 2 else print(""))
 
 game_board()
 
