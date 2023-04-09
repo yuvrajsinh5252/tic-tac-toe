@@ -9,16 +9,16 @@ const do_this = [
 let X = 1,O = 1,tie = 1;
 
 function is_win() {
-    if ((values[1] == values[5] && values[5] == values[9]) || (values[3] == values[5] && values[5] == values[7])) {
+    if (((values[1] == values[5] && values[5] == values[9]) || (values[3] == values[5] && values[5] == values[7])) && values[5] != null) {
         return values[5];
     } else {
         for (let i = 1; i <= 7; i += 3) {
-            if (values[i] == values[i + 1] && values[i + 1] == values[i + 2]) {
+            if (values[i] == values[i + 1] && values[i + 1] == values[i + 2] && values[i] != null) {
                 return values[i];
             } 
         }
         for (let i = 1; i <= 3; i++) {
-            if (values[i] == values[i + 3] && values[i + 3] == values[i + 6]) {
+            if (values[i] == values[i + 3] && values[i + 3] == values[i + 6] && values[i] != null) {
                 return values[i];
             }
         }
