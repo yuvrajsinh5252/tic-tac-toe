@@ -1,17 +1,12 @@
 let tiles = Array.from(document.getElementsByClassName('tile'))  
 let values = Array(9).fill(null)
 
-const do_this = [
-    {opacity: 0,scale: 1},
-    {opacity: 1,scale: 1}
-]
-
-const pop = [
-    {fontSize: 0},
-    {fontSize: 1}
-]
+const do_this = [{opacity: 0},{opacity: 1}]
+const pop = [{fontSize: 0},{fontSize: 1}]
 
 let X = 1,O = 1,tie = 1;
+
+// AI's move
 
 function next_move() {
     let best_score = -Infinity;
@@ -19,7 +14,7 @@ function next_move() {
     for (let i = 1; i <= 9; i++) {
         if (values[i] == null) {
             values[i] = 'X';
-            let score = minimax(values);
+            let score = minimax(values, 0, false);
             values[i] = null;
             if (score > best_score) {
                 best_score = score;
@@ -27,15 +22,48 @@ function next_move() {
             }
         }
     }
+    let elem = document.getElementById(`${bestMove}`)
     values[bestMove] = 'X';
-    document.getElementById(`${bestMove}`).innerHTML = 'X';
+    elem.innerHTML = 'X';
+    elem.animate(pop, {duration: 100, iterations: 1})
 }
 
-function minimax(values) {
-    return 1;
+let token = {X:1, O:-1, tie:0}
+
+function minimax(values, depth, Is_maximizing) {   
+    result = is_win()
+    if (result != 0) {
+        return token[result] // returns value as per the winning probabilty
+    }
+    if (Is_maximizing) {
+        let bestScore = -Infinity;
+        for (let i = 1; i <= 9; i++) {
+            if (values[i] == null) {
+                values[i] = 'X'
+                score = minimax(values, depth + 1, false)
+                values[i] = null
+                bestScore = Math.max(score, bestScore) // possibility of X wins
+            }
+        }
+        return bestScore
+    } else {
+        let bestScore = Infinity
+        for (let i = 1; i <= 9; i++) {
+            if (values[i] == null) {
+                values[i] = 'O'
+                score = minimax(values, depth + 1, true)
+                values[i] = null
+                bestScore = Math.min(score, bestScore) // possibilty of O wins
+            }
+        }
+        return bestScore
+    }
 }
+
+// end
 
 function is_win() {
+    let ans = 0
     if (((values[1] == values[5] && values[5] == values[9]) || (values[3] == values[5] && values[5] == values[7])) && values[5] != null) {
         return values[5];
     } else {
@@ -50,6 +78,38 @@ function is_win() {
             }
         }
     }
+    for (let i = 1; i <= 9; i++) {
+        if (values[i] == null)
+            ans = 1;
+    }
+    if (ans === 0)
+        return 'tie'
+    else 
+        return 0
+}
+
+function check_win() {
+    const win = is_win();
+    if (win != 0) {
+        document.getElementById("game_board").style = `opacity: ${.5}`;
+        document.getElementById("end").style = `opacity: ${100}%; visibility: visible;`;
+        document.getElementById("win").innerHTML = `(${win})` + " " + "Wins";
+        document.getElementById("end").animate(do_this, { duration: 400, iterations: 1});
+        document.getElementById("restart").onclick = reset;
+        if (win == 'X') {
+            document.getElementById("x").innerHTML = X;
+            X++;
+        } else if (win == 'O') {
+            document.getElementById("o").innerHTML = O;
+            O++;
+        } else if (win == 'tie') {
+            document.getElementById("win").innerHTML = "!TIE!";
+            document.getElementById("t").innerHTML = tie;
+            tie++;
+        }
+        return true;   
+    } else 
+        return false;
 }
 
 function reset() {
@@ -100,50 +160,23 @@ function box_clicked(e) {
     if(done) 
         return
 
-        if (values[id] == null) {
-            let elem = document.getElementById(id);
+    if (values[id] == null) {
+        let elem = document.getElementById(id);
         if (k % 2 == 0) {
             elem.innerHTML = 'X';
-            elem.animate(pop, {duration: 100, iterations: 1});
             values[id] = 'X';
         } else {
             elem.innerHTML = 'O';
-            elem.animate(pop, {duration: 100, iterations: 1});
             values[id] = 'O';
         }
+        elem.animate(pop, {duration: 100, iterations: 1});
 
-        const win = is_win();
-        if (win == 'X' || win == 'O') {
-            document.getElementById("game_board").style = `opacity: ${.5}`;
-            document.getElementById("end").style = `opacity: ${100}%; visibility: visible;`;
-            document.getElementById("win").innerHTML = `(${win})` + " " + "Wins";
-            document.getElementById("end").animate(do_this, { duration: 400, iterations: 1});
-            document.getElementById("restart").onclick = reset;
-            if (win == 'X') {
-                document.getElementById("x").innerHTML = X;
-                X++;
-            } else {
-                document.getElementById("o").innerHTML = O;
-                O++;
-            }
-            done = true;
-            return;   
-        }   
+        done = check_win()
         if (players === 1) {
             next_move();
+            done = check_win()
             k -= 1;
         }
-        k -= 1;
-    } 
-    if (k == 0) {
-        document.getElementById("game_board").style = `opacity: ${.5}`;
-        document.getElementById("end").style = `opacity: ${100}%; visibility: visible;`;
-        document.getElementById("win").innerHTML = "!TIE!";
-        document.getElementById("end").animate(do_this, { duration: 400, iterations: 1});
-        document.getElementById("restart").onclick = reset;
-        document.getElementById("t").innerHTML = tie;
-        tie++;
-        done = true;
-        return;   
+        k -= 1; 
     }
 }

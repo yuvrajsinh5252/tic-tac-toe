@@ -59,7 +59,6 @@ body {
     height: 100px;
     justify-content: center;
     align-items: center;
-    padding-top: 10px;
 }
 .pl1,.pl2,.tie {
     display: flex;
