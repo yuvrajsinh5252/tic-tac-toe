@@ -10,45 +10,49 @@ let X = 1,O = 1,tie = 1;
 function changeMode() {
     if (Light == true) {
         document.getElementsByTagName("body")[0].classList.add("Dark");
-        document.getElementsByClassName("board")[0].style = "background-color: #FFFFFF;";
-        document.getElementsByClassName("title")[0].style = "color: #FFFFFF;";
-        document.getElementsByTagName("g")[0].style = "fill: white;";
+        document.getElementsByClassName("board")[0].style.backgroundColor = "#FFFFFF";
+        document.getElementsByClassName("title")[0].style.color = "#FFFFFF";
+        document.getElementsByTagName("g")[0].style.fill = "white";
         document.getElementById("modes").src = "Assests/darkbulb.png"
 
         let elem = document.getElementsByClassName("tile");
         for (let i = 0; i < elem.length; i++) {
-            elem[i].style = "background-color: #000000;";
+            elem[i].style.backgroundColor = "#000000";
+            elem[i].style.color = "#FFFFFF";
         }
 
-        document.getElementById("o").style = "color: #FFFFFF;";
-        document.getElementById("x").style = "color: #FFFFFF;";
-        document.getElementById("t").style = "color: #FFFFFF;";
-        document.getElementById("T").style = "color: #FFFFFF;";
-        document.getElementById("X").style = "color: #FFFFFF;";
-        document.getElementById("O").style = "color: #FFFFFF;";
-        document.getElementById("p11").style = "color: #FFFFFF;";
-        document.getElementById("p22").style = "color: #FFFFFF;";
+        document.getElementById("o").style.color = "#FFFFFF";
+        document.getElementById("x").style.color = "#FFFFFF";
+        document.getElementById("t").style.color = "#FFFFFF";
+        document.getElementById("T").style.color = "#FFFFFF";
+        document.getElementById("X").style.color = "#FFFFFF";
+        document.getElementById("O").style.color = "#FFFFFF";
+        document.getElementById("p11").style.color = "#FFFFFF";
+        document.getElementById("p22").style.color = "#FFFFFF";
+        document.getElementById("win").style.color = "#FFFFFF";
         Light = false;
     } else {
         document.getElementsByTagName("body")[0].classList.remove("Dark");
-        document.getElementsByClassName("board")[0].style = "background-color: #000000;";
-        document.getElementsByClassName("title")[0].style = "color: rgb(113, 105, 103);";
-        document.getElementsByTagName("g")[0].style = "fill: rgb(104, 88, 88);";
+        document.getElementsByClassName("board")[0].style.backgroundColor = "#000000";
+        document.getElementsByClassName("title")[0].style.color = "rgb(113, 105, 103)";
+        document.getElementsByTagName("g")[0].style.fill = "rgb(104, 88, 88)";
         document.getElementById("modes").src = "Assests/lightbulb.png"
         
         let elem = document.getElementsByClassName("tile");
         for (let i = 0; i < elem.length; i++) {
-            elem[i].style = "background-color: #FFFFFF;";
+            elem[i].style.backgroundColor = "#FFFFFF";
+            elem[i].style.color = "rgb(104, 88, 88)";
         }
 
-        document.getElementById("o").style = "color: #000000;";
-        document.getElementById("x").style = "color: #000000;";
-        document.getElementById("t").style = "color: #000000;";
-        document.getElementById("T").style = "color: #000000;";
-        document.getElementById("X").style = "color: #000000;";
-        document.getElementById("O").style = "color: #000000;";
-        document.getElementById("p11").style = "color: #000000;";
-        document.getElementById("p22").style = "color: #000000;";
+        document.getElementById("o").style.color = "#000000";
+        document.getElementById("x").style.color = "#000000";
+        document.getElementById("t").style.color = "#000000";
+        document.getElementById("T").style.color = "#000000";
+        document.getElementById("X").style.color = "#000000";
+        document.getElementById("O").style.color = "#000000";
+        document.getElementById("p11").style.color = "#000000";
+        document.getElementById("p22").style.color = "#000000";
+        document.getElementById("win").style.color = "rgb(104, 88, 88)";
         Light = true;
     }
 }
@@ -140,7 +144,7 @@ function is_win() {
 function check_win() {
     const win = is_win();
     if (win != 0) {
-        document.getElementById("game_board").style = `opacity: ${.5}`;
+        document.getElementById("game_board").style.opacity = `${.5}`;
         document.getElementById("end").style = `opacity: ${100}%; visibility: visible;`;
         document.getElementById("win").innerHTML = `(${win})` + " " + "Wins";
         document.getElementById("end").animate(do_this, { duration: 400, iterations: 1});
@@ -166,7 +170,7 @@ function reset() {
     for (let i = 1; i <= 9; i++) {
         document.getElementById(`${i}`).innerHTML = "";
     }
-    document.getElementById("game_board").style = `opacity: ${1}`;
+    document.getElementById("game_board").style.opacity = `${1}`;
     document.getElementById("end").style = `opacity: ${0}%; visibility: hidden;`;
     done = false;
     k = 9;
