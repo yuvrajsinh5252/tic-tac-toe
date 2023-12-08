@@ -1,10 +1,57 @@
 let tiles = Array.from(document.getElementsByClassName('tile'))  
 let values = Array(9).fill(null)
+let Light = true;
 
 const do_this = [{opacity: 0},{opacity: 1}]
-const pop = [{fontSize: 0},{fontSize: 1}]
+const pop = [{fontSize: '0'},{fontSize : '100px'}]
 
 let X = 1,O = 1,tie = 1;
+
+function changeMode() {
+    if (Light == true) {
+        document.getElementsByTagName("body")[0].classList.add("Dark");
+        document.getElementsByClassName("board")[0].style = "background-color: #FFFFFF;";
+        document.getElementsByClassName("title")[0].style = "color: #FFFFFF;";
+        document.getElementsByTagName("g")[0].style = "fill: white;";
+        document.getElementById("modes").src = "Assests/darkbulb.png"
+
+        let elem = document.getElementsByClassName("tile");
+        for (let i = 0; i < elem.length; i++) {
+            elem[i].style = "background-color: #000000;";
+        }
+
+        document.getElementById("o").style = "color: #FFFFFF;";
+        document.getElementById("x").style = "color: #FFFFFF;";
+        document.getElementById("t").style = "color: #FFFFFF;";
+        document.getElementById("T").style = "color: #FFFFFF;";
+        document.getElementById("X").style = "color: #FFFFFF;";
+        document.getElementById("O").style = "color: #FFFFFF;";
+        document.getElementById("p11").style = "color: #FFFFFF;";
+        document.getElementById("p22").style = "color: #FFFFFF;";
+        Light = false;
+    } else {
+        document.getElementsByTagName("body")[0].classList.remove("Dark");
+        document.getElementsByClassName("board")[0].style = "background-color: #000000;";
+        document.getElementsByClassName("title")[0].style = "color: rgb(113, 105, 103);";
+        document.getElementsByTagName("g")[0].style = "fill: rgb(104, 88, 88);";
+        document.getElementById("modes").src = "Assests/lightbulb.png"
+        
+        let elem = document.getElementsByClassName("tile");
+        for (let i = 0; i < elem.length; i++) {
+            elem[i].style = "background-color: #FFFFFF;";
+        }
+
+        document.getElementById("o").style = "color: #000000;";
+        document.getElementById("x").style = "color: #000000;";
+        document.getElementById("t").style = "color: #000000;";
+        document.getElementById("T").style = "color: #000000;";
+        document.getElementById("X").style = "color: #000000;";
+        document.getElementById("O").style = "color: #000000;";
+        document.getElementById("p11").style = "color: #000000;";
+        document.getElementById("p22").style = "color: #000000;";
+        Light = true;
+    }
+}
 
 // AI's move
 
@@ -22,10 +69,12 @@ function next_move() {
             }
         }
     }
-    let elem = document.getElementById(`${bestMove}`)
-    values[bestMove] = 'X';
-    elem.innerHTML = 'X';
-    elem.animate(pop, {duration: 100, iterations: 1})
+    let elem = document.getElementById(`${bestMove}`);
+    if (elem && elem.innerHTML !== null) {
+        values[bestMove] = 'X';
+        elem.innerHTML = 'X';
+        elem.animate(pop, {duration: 100, iterations: 1});
+    }
 }
 
 let token = {X:1, O:-1, tie:0}
@@ -129,7 +178,6 @@ const temp1 = document.querySelectorAll('.p1');
 const temp2 = document.querySelectorAll('.p2');
 
 function mode(e) {
-    console.log(e.target.classList.contains('p1'))
     if (!e.target.classList.contains('p1')) {
         temp1.forEach(p1 => {p1.style.visibility = 'visible';});
         temp2.forEach(p2 => {p2.style.visibility = 'hidden';});
@@ -144,6 +192,7 @@ function mode(e) {
 }
 document.getElementById("p1").onclick = mode;
 document.getElementById("p2").onclick = mode;
+document.getElementsByClassName("mode")[0].onclick = changeMode;
 
 const start_game = () => {  
     tiles.forEach(tile => tile.addEventListener('click',box_clicked))
