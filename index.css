@@ -2,17 +2,20 @@
 
 * {
   margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 body {
   height: 100vh;
-  width: 100%;
+  width: 100vw;
   font-family: "Poppins", sans-serif;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
   background-color: rgb(255, 255, 255);
+  overflow-x: hidden;
+  min-height: 500px;
 }
 .mode {
   position: absolute;
@@ -45,7 +48,8 @@ body {
 .top {
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 20px;
+  justify-content: space-between;
 }
 .board {
   opacity: 1;
@@ -99,8 +103,6 @@ span {
 }
 .swap {
   vertical-align: top;
-  width: 100px;
-  margin: -5px -30px 0 0;
   opacity: 0.5;
   cursor: pointer;
   outline: 0;
@@ -149,7 +151,27 @@ h1 {
     height: 100px;
     font-size: 100px;
   }
+  .board,
+  .board div {
+    gap: 8px;
+  }
   .title {
     font-size: 45px;
+  }
+  #O,
+  #X,
+  #T {
+    font-size: 16px;
+  }
+  .score {
+    width: fit-content;
+  }
+  .mode {
+    width: 40px;
+    height: 40px;
+  }
+  .swap {
+    /* margin-left: 20px; */
+    width: 30px;
   }
 }
