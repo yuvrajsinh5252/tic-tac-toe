@@ -153,29 +153,57 @@ function is_win() {
   else return 0;
 }
 
+function draw_line(win) {
+  const line = document.getElementById("line");
+
+  if (win === values[1] && win === values[2] && win === values[3])
+    line.style.transform = "translate(0, -150px)";
+  else if (win === values[7] && win === values[8] && win === values[9])
+    line.style.transform = "translate(0, 150px)";
+  else if (win === values[1] && win === values[4] && win === values[7])
+    line.style.transform = "translate(-150px, 0) rotate(90deg)";
+  else if (win === values[2] && win === values[5] && win === values[8])
+    line.style.transform = "rotate(90deg)";
+  else if (win === values[3] && win === values[6] && win === values[9])
+    line.style.transform = "translate(150px, 0) rotate(90deg)";
+  else if (win === values[1] && win === values[5] && win === values[9]) {
+    line.style.transform = "translate(-100px, 0) rotate(45deg)";
+    line.style.width = "135%";
+  } else if (win === values[3] && win === values[5] && win === values[7]) {
+    line.style.transform = "translate(-100px, 0) rotate(-45deg)";
+    line.style.width = "135%";
+  }
+}
+
 function check_win() {
   const win = is_win();
   if (win != 0) {
-    document.getElementById("game_board").style.filter = "blur(5px)";
-    document.getElementById(
-      "end"
-    ).style = `opacity: ${100}%; visibility: visible;`;
-    document.getElementById("win").innerHTML = `(${win})` + " " + "Wins";
-    document
-      .getElementById("end")
-      .animate(do_this, { duration: 400, iterations: 1 });
-    document.getElementById("restart").onclick = reset;
-    if (win == "X") {
-      document.getElementById("x").innerHTML = X;
-      X++;
-    } else if (win == "O") {
-      document.getElementById("o").innerHTML = O;
-      O++;
-    } else if (win == "tie") {
-      document.getElementById("win").innerHTML = "!TIE!";
-      document.getElementById("t").innerHTML = tie;
-      tie++;
-    }
+    draw_line(win);
+    if (win != "tie") line.style.visibility = "visible";
+
+    setTimeout(() => {
+      document.getElementById("game_board").style.filter = "blur(5px)";
+      document.getElementById("line").style.filter = "blur(5px)";
+      document.getElementById(
+        "end"
+      ).style = `opacity: ${100}%; visibility: visible;`;
+      document.getElementById("win").innerHTML = `(${win})` + " " + "Wins";
+      document
+        .getElementById("end")
+        .animate(do_this, { duration: 400, iterations: 1 });
+      document.getElementById("restart").onclick = reset;
+      if (win == "X") {
+        document.getElementById("x").innerHTML = X;
+        X++;
+      } else if (win == "O") {
+        document.getElementById("o").innerHTML = O;
+        O++;
+      } else if (win == "tie") {
+        document.getElementById("win").innerHTML = "!TIE!";
+        document.getElementById("t").innerHTML = tie;
+        tie++;
+      }
+    }, 1000);
     return true;
   } else return false;
 }
@@ -186,6 +214,8 @@ function reset() {
     document.getElementById(`${i}`).innerHTML = "";
   }
   document.getElementById("game_board").style.filter = "blur(0px)";
+  document.getElementById("line").style.filter = "blur(0px)";
+  document.getElementById("line").style.visibility = "hidden";
   document.getElementById("end").style = `opacity: ${0}%; visibility: hidden;`;
   done = false;
   k = 9;

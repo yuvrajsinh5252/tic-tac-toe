@@ -52,6 +52,7 @@ body {
   justify-content: space-between;
 }
 .board {
+  position: relative;
   filter: blur(0);
   gap: 10px;
   background-color: black;
@@ -142,6 +143,7 @@ p {
   height: 200px;
   width: 250px;
   border-radius: 10px;
+  z-index: 10;
 }
 .result h1 {
   color: black;
@@ -158,6 +160,17 @@ p {
 h1 {
   color: rgb(81, 70, 49);
 }
+
+#line {
+  position: absolute;
+  width: 450px;
+  height: 10px;
+  top: 49%;
+  border-radius: 10px;
+  background-color: black;
+  visibility: hidden;
+}
+
 @media (max-width: 470px) {
   .tile {
     width: 100px;
@@ -188,5 +201,8 @@ h1 {
   }
   .swap {
     width: 30px;
+  }
+  #line {
+    width: 300px;
   }
 }
