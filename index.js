@@ -156,23 +156,44 @@ function is_win() {
 function draw_line(win) {
   const line = document.getElementById("line");
 
-  if (win === values[1] && win === values[2] && win === values[3])
-    line.style.transform = "translate(0, -150px)";
-  else if (win === values[7] && win === values[8] && win === values[9])
-    line.style.transform = "translate(0, 150px)";
-  else if (win === values[1] && win === values[4] && win === values[7])
-    line.style.transform = "translate(-150px, 0) rotate(90deg)";
-  else if (win === values[2] && win === values[5] && win === values[8])
-    line.style.transform = "rotate(90deg)";
-  else if (win === values[3] && win === values[6] && win === values[9])
-    line.style.transform = "translate(150px, 0) rotate(90deg)";
-  else if (win === values[1] && win === values[5] && win === values[9]) {
-    line.style.transform = "translate(-100px, 0) rotate(45deg)";
-    line.style.width = "135%";
-  } else if (win === values[3] && win === values[5] && win === values[7]) {
-    line.style.transform = "translate(-100px, 0) rotate(-45deg)";
-    line.style.width = "135%";
-  }
+  const transforms = {
+    row1: "translate(0, -150px)",
+    row3: "translate(0, 150px)",
+    col1: "translate(-150px, 0) rotate(90deg)",
+    col2: "rotate(90deg)",
+    col3: "translate(150px, 0) rotate(90deg)",
+    diag1: "translate(-100px, 0) rotate(45deg)",
+    diag2: "translate(-100px, 0) rotate(-45deg)",
+  };
+  const smallTransforms = {
+    row1: "translate(0, -100px)",
+    row3: "translate(0, 100px)",
+    col1: "translate(-100px, 0) rotate(90deg)",
+    col2: "rotate(90deg)",
+    col3: "translate(100px, 0) rotate(90deg)",
+    diag1: "translate(-66.6px, 0) rotate(45deg)",
+    diag2: "translate(-66.6px, 0) rotate(-45deg)",
+  };
+
+  const isSmallDevice = window.matchMedia("(max-width: 470px)").matches;
+  const selectedTransforms = isSmallDevice ? smallTransforms : transforms;
+
+  const winPatterns = [
+    [1, 2, 3, "row1"],
+    [7, 8, 9, "row3"],
+    [1, 4, 7, "col1"],
+    [2, 5, 8, "col2"],
+    [3, 6, 9, "col3"],
+    [1, 5, 9, "diag1"],
+    [3, 5, 7, "diag2"],
+  ];
+
+  winPatterns.forEach(([a, b, c, transform]) => {
+    if (win === values[a] && win === values[b] && win === values[c]) {
+      line.style.transform = selectedTransforms[transform];
+      if (transform.includes("diag")) line.style.width = "135%";
+    }
+  });
 }
 
 function check_win() {
