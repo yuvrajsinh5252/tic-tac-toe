@@ -52,7 +52,7 @@ body {
   justify-content: space-between;
 }
 .board {
-  opacity: 1;
+  filter: blur(0);
   gap: 10px;
   background-color: black;
   display: flex;
@@ -128,18 +128,31 @@ p {
 }
 .result {
   position: absolute;
+  border: 1px solid black;
   top: auto;
   left: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  gap: 20px;
   align-items: center;
   opacity: 0;
   visibility: hidden;
+  background-color: rgb(191, 191, 191);
+  height: 200px;
+  width: 250px;
+  border-radius: 10px;
+}
+.result h1 {
+  color: black;
 }
 .restart {
-  width: 200px;
-  font-size: 30px;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  outline: 0;
+  font-size: 25px;
   color: black;
 }
 h1 {
@@ -170,8 +183,10 @@ h1 {
     width: 40px;
     height: 40px;
   }
+  .restart {
+    font-size: 20px;
+  }
   .swap {
-    /* margin-left: 20px; */
     width: 30px;
   }
 }

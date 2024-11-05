@@ -32,7 +32,6 @@ function changeMode() {
     document.getElementById("O").style.color = "#FFFFFF";
     document.getElementById("p11").style.color = "#FFFFFF";
     document.getElementById("p22").style.color = "#FFFFFF";
-    document.getElementById("win").style.color = "#FFFFFF";
     Light = false;
   } else {
     document.getElementsByTagName("body")[0].classList.remove("Dark");
@@ -57,7 +56,6 @@ function changeMode() {
     document.getElementById("O").style.color = "#000000";
     document.getElementById("p11").style.color = "#000000";
     document.getElementById("p22").style.color = "#000000";
-    document.getElementById("win").style.color = "rgb(104, 88, 88)";
     Light = true;
   }
 }
@@ -158,7 +156,7 @@ function is_win() {
 function check_win() {
   const win = is_win();
   if (win != 0) {
-    document.getElementById("game_board").style.opacity = `${0.5}`;
+    document.getElementById("game_board").style.filter = "blur(5px)";
     document.getElementById(
       "end"
     ).style = `opacity: ${100}%; visibility: visible;`;
@@ -187,7 +185,7 @@ function reset() {
   for (let i = 1; i <= 9; i++) {
     document.getElementById(`${i}`).innerHTML = "";
   }
-  document.getElementById("game_board").style.opacity = `${1}`;
+  document.getElementById("game_board").style.filter = "blur(0px)";
   document.getElementById("end").style = `opacity: ${0}%; visibility: hidden;`;
   done = false;
   k = 9;
