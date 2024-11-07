@@ -162,8 +162,8 @@ function draw_line(win) {
     col1: "translate(-150px, 0) rotate(90deg)",
     col2: "rotate(90deg)",
     col3: "translate(150px, 0) rotate(90deg)",
-    diag1: "translate(-100px, 0) rotate(45deg)",
-    diag2: "translate(-100px, 0) rotate(-45deg)",
+    diag1: "translate(-80px, 0) rotate(45deg)",
+    diag2: "translate(-80px, 0) rotate(-45deg)",
   };
   const smallTransforms = {
     row1: "translate(0, -100px)",
@@ -237,6 +237,7 @@ function reset() {
   document.getElementById("game_board").style.filter = "blur(0px)";
   document.getElementById("line").style.filter = "blur(0px)";
   document.getElementById("line").style.visibility = "hidden";
+  document.getElementById("line").transform = "translate(0, 0)";
   document.getElementById("end").style = `opacity: ${0}%; visibility: hidden;`;
   done = false;
   k = 9;
