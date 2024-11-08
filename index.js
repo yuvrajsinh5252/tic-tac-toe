@@ -166,13 +166,13 @@ function draw_line(win) {
     diag2: "translate(-80px, 0) rotate(-45deg)",
   };
   const smallTransforms = {
-    row1: "translate(0, -100px)",
-    row3: "translate(0, 100px)",
-    col1: "translate(-100px, 0) rotate(90deg)",
+    row1: "translate(0, -108px)",
+    row3: "translate(0, 108px)",
+    col1: "translate(-108px, 0) rotate(90deg)",
     col2: "rotate(90deg)",
-    col3: "translate(100px, 0) rotate(90deg)",
-    diag1: "translate(-66.6px, 0) rotate(45deg)",
-    diag2: "translate(-66.6px, 0) rotate(-45deg)",
+    col3: "translate(108px, 0) rotate(90deg)",
+    diag1: "translate(-54px, 0) rotate(45deg)",
+    diag2: "translate(-54px, 0) rotate(-45deg)",
   };
 
   const isSmallDevice = window.matchMedia("(max-width: 470px)").matches;
@@ -203,11 +203,11 @@ function check_win() {
     if (win != "tie") line.style.visibility = "visible";
 
     setTimeout(() => {
-      document.getElementById("game_board").style.filter = "blur(5px)";
-      document.getElementById("line").style.filter = "blur(5px)";
-      document.getElementById(
-        "end"
-      ).style = `opacity: ${100}%; visibility: visible;`;
+      // document.getElementById("game_board").style.filter = "blur(5px)";
+      // document.getElementById("line").style.filter = "blur(.5px)";
+      // document.getElementById(
+      //   "end"
+      // ).style = `opacity: ${100}%; visibility: visible;`;
       document.getElementById("win").innerHTML = `(${win})` + " " + "Wins";
       document
         .getElementById("end")
@@ -235,8 +235,11 @@ function reset() {
     document.getElementById(`${i}`).innerHTML = "";
   }
   document.getElementById("game_board").style.filter = "blur(0px)";
-  document.getElementById("line").style.filter = "blur(0px)";
-  document.getElementById("line").style.visibility = "hidden";
+  document.getElementById("line").style = {
+    visibility: "hidden",
+    width: "100%",
+    transform: "translate(0, 0) rotate(0deg)",
+  };
   document.getElementById("line").transform = "translate(0, 0)";
   document.getElementById("end").style = `opacity: ${0}%; visibility: hidden;`;
   done = false;
