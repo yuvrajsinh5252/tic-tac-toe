@@ -203,11 +203,11 @@ function check_win() {
     if (win != "tie") line.style.visibility = "visible";
 
     setTimeout(() => {
-      // document.getElementById("game_board").style.filter = "blur(5px)";
-      // document.getElementById("line").style.filter = "blur(.5px)";
-      // document.getElementById(
-      //   "end"
-      // ).style = `opacity: ${100}%; visibility: visible;`;
+      document.getElementById("game_board").style.filter = "blur(5px)";
+      document.getElementById("line").style.filter = "blur(.5px)";
+      document.getElementById(
+        "end"
+      ).style = `opacity: ${100}%; visibility: visible;`;
       document.getElementById("win").innerHTML = `(${win})` + " " + "Wins";
       document
         .getElementById("end")
