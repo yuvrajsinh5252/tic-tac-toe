@@ -16,6 +16,10 @@ body {
   align-items: center;
   background-color: rgb(255, 255, 255);
   min-height: 500px;
+  overflow: hidden;
+  position: fixed;
+  touch-action: none;
+  -webkit-overflow-scrolling: none;
 }
 .mode {
   position: absolute;
